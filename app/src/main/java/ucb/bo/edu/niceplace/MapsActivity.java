@@ -51,8 +51,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         RealmResults<Place> list = this.myRealm.where(Place.class).findAll();
         for (Place u : list) {
             System.out.println(u.getId() + " Nombre " + u.getName());
-            System.out.println(u.getId() + " latitud " + u.getName());
-            System.out.println(u.getId() + " longitud " + u.getName());
+            System.out.println(u.getId() + " latitud " + u.getLatitude());
+            System.out.println(u.getId() + " longitud " + u.getLongitude());
         }
     }
 

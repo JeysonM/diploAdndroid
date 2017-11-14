@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">nicePlace</string>
     <string name="title_activity_maps">Map</string>
+    <!-- Registro de lugares -->
+    <string name="txtLabelNamePlace">Nombre</string>
+    <string name="txtLabelDescriptionPlace">Descripción</string>
+
 </resources>
