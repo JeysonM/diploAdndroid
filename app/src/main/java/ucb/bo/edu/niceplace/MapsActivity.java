@@ -10,9 +10,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import java.util.UUID;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
+
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Realm myRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +32,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        this.myRealm = Realm.getDefaultInstance();
+
+        this.myRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+                Place place = realm.createObject(Place.class, UUID.randomUUID().toString());
+                place.setName("Manchester");
+                place.setDescription("Es un lugar donde se vende alitas de pollo");
+                place.setLatitude(4.234233);
+                place.setLongitude(5.23423);
+            }
+        });
+
+        RealmResults<Place> list = this.myRealm.where(Place.class).findAll();
+        for (Place u : list) {
+            System.out.println(u.getId() + " Nombre " + u.getName());
+            System.out.println(u.getId() + " latitud " + u.getName());
+            System.out.println(u.getId() + " longitud " + u.getName());
+        }
     }
 
 
